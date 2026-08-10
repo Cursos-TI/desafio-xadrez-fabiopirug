@@ -2,34 +2,49 @@
 
 int main() {
     // ---- MOVIMENTAÇÃO DA TORRE ----
-    // A torre deve se mover 5 casas para a direita.
-    // Para isso, utilizamos a estrutura de repetição 'for' com uma variável inteira descritiva.
     printf("Movimento da Torre:\n");
     for (int casaTorre = 1; casaTorre <= 5; casaTorre++) {
-        printf("Direita\n"); // Imprime a direção a cada casa percorrida
+        printf("Direita\n");
     }
-    printf("\n"); // Quebra de linha para organizar o console
+    printf("\n");
 
-    // ---- MOVIMENTAÇÃO DO BISPO ----
-    // O bispo deve se mover 5 casas na diagonal para cima e à direita.
-    // Para esta peça, utilizamos a estrutura de repetição 'while' e variável inteira.
+    // ---- MOVIMENTAÇÃO DO BISPO (Nível Aventureiro: Loops Aninhados) ----
     printf("Movimento do Bispo:\n");
-    int casaBispo = 1; // Inicializa o contador de casas do bispo
-    while (casaBispo <= 5) {
-        printf("Cima, Direita\n"); // Imprime a combinação de direções da diagonal
-        casaBispo++; // Incrementa o contador para evitar loop infinito
+    // Loop externo para a direção vertical (Cima)
+    for (int i = 1; i <= 5; i++) {
+        // Loop interno para a direção horizontal (Direita)
+        int j = 1;
+        while (j <= i) {
+            if (j == i) {
+                printf("Cima, Direita\n");
+            }
+            j++;
+        }
     }
     printf("\n");
 
     // ---- MOVIMENTAÇÃO DA RAINHA ----
-    // A rainha deve se mover 8 casas para a esquerda.
-    // Para cumprir o desafio, utilizamos a estrutura de repetição 'do-while' com variável inteira.
     printf("Movimento da Rainha:\n");
-    int casaRainha = 1; // Inicializa o contador de casas da rainha
+    int casaRainha = 1;
     do {
-        printf("Esquerda\n"); // Imprime a direção a cada passo
-        casaRainha++; // Incrementa o contador de casas
-    } while (casaRainha <= 8); // Condição testada após a execução do bloco
+        printf("Esquerda\n");
+        casaRainha++;
+    } while (casaRainha <= 8);
+    printf("\n");
+
+    // ---- MOVIMENTAÇÃO DO CAVALO (Nível Aventureiro: Obrigatório) ----
+    printf("--- MOVIMENTAÇÃO DO CAVALO ---\n");
+    // Loop externo (For) controla os movimentos verticais (2 casas para Baixo)
+    for (int i = 0; i < 2; i++) {
+        printf("Baixo\n");
+        
+        // Loop aninhado interno (While) executa na última rodada para ir para a esquerda
+        int j = 0;
+        while (i == 1 && j < 1) { 
+            printf("Esquerda\n");
+            j++;
+        }
+    }
 
     return 0;
 }
