@@ -1,50 +1,72 @@
 #include <stdio.h>
 
+// --- FUNÇÕES RECURSIVAS (Exigência do Nível Mestre) ---
+
+// Função recursiva para mover a Torre (5 casas para a Direita)
+void moverTorre(int casas) {
+    if (casas <= 0) return; // Condição de parada
+    printf("Direita\n");
+    moverTorre(casas - 1);  // Chamada recursiva
+}
+
+// Função recursiva para mover a Rainha (8 casas para a Esquerda)
+void moverRainha(int casas) {
+    if (casas <= 0) return; // Condição de parada
+    printf("Esquerda\n");
+    moverRainha(casas - 1); // Chamada recursiva
+}
+
+// Função recursiva para mover o Bispo (5 casas na Diagonal Direita para Cima)
+// O enunciado diz que o Bispo exige loops aninhados combinados com recursividade
+void moverBispoRecursivo(int casas) {
+    if (casas <= 0) return; // Condição de parada
+    
+    // Loops aninhados simulando as componentes da diagonal (Cima e Direita)
+    for (int i = 0; i < 1; i++) {
+        for (int j = 0; j < 1; j++) {
+            printf("Cima, ");
+            printf("Direita\n");
+        }
+    }
+    moverBispoRecursivo(casas - 1); // Chamada recursiva
+}
+
 int main() {
-    // ---- MOVIMENTAÇÃO DA TORRE ----
-    printf("Movimento da Torre:\n");
-    for (int casaTorre = 1; casaTorre <= 5; casaTorre++) {
-        printf("Direita\n");
-    }
+    // --- MOVIMENTAÇÃO DA TORRE ---
+    printf("--- MOVIMENTAÇÃO DA TORRE ---\n");
+    moverTorre(5);
     printf("\n");
 
-    // ---- MOVIMENTAÇÃO DO BISPO (Nível Aventureiro: Loops Aninhados) ----
-    printf("Movimento do Bispo:\n");
-    // Loop externo para a direção vertical (Cima)
-    for (int i = 1; i <= 5; i++) {
-        // Loop interno para a direção horizontal (Direita)
-        int j = 1;
-        while (j <= i) {
-            if (j == i) {
-                printf("Cima, Direita\n");
-            }
-            j++;
-        }
-    }
+    // --- MOVIMENTAÇÃO DA RAINHA ---
+    printf("--- MOVIMENTAÇÃO DA RAINHA ---\n");
+    moverRainha(8);
     printf("\n");
 
-    // ---- MOVIMENTAÇÃO DA RAINHA ----
-    printf("Movimento da Rainha:\n");
-    int casaRainha = 1;
-    do {
-        printf("Esquerda\n");
-        casaRainha++;
-    } while (casaRainha <= 8);
+    // --- MOVIMENTAÇÃO DO BISPO ---
+    printf("--- MOVIMENTAÇÃO DO BISPO ---\n");
+    moverBispoRecursivo(5);
     printf("\n");
 
-    // ---- MOVIMENTAÇÃO DO CAVALO (Nível Aventureiro: Obrigatório) ----
+    // --- MOVIMENTAÇÃO DO CAVALO (Loops Aninhados Complexos) ---
     printf("--- MOVIMENTAÇÃO DO CAVALO ---\n");
-    // Loop externo (For) controla os movimentos verticais (2 casas para Baixo)
-    for (int i = 0; i < 2; i++) {
-        printf("Baixo\n");
-        
-        // Loop aninhado interno (While) executa na última rodada para ir para a esquerda
-        int j = 0;
-        while (i == 1 && j < 1) { 
-            printf("Esquerda\n");
-            j++;
+    
+    // Loop externo e interno com condições múltiplas e break/continue
+    // Objetivo: 2 casas para Cima e 1 para a Direita
+    for (int i = 0, passosVerticais = 2; i < 3; i++) {
+        for (int j = 0; j < 2; j++) {
+            // Movimento Vertical (Cima)
+            if (i < passosVerticais) {
+                if (j > 0) continue; // Ignora o resto do loop interno nesta rodada
+                printf("Cima\n");
+                break; // Sai do loop interno para computar o próximo passo vertical
+            }
+            // Movimento Horizontal (Direita) - Executado após os passos verticais
+            else if (i == passosVerticais && j == 1) {
+                printf("Direita\n");
+            }
         }
     }
+    printf("\n");
 
     return 0;
 }
